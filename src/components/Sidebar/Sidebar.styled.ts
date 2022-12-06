@@ -40,6 +40,7 @@ export const SidebarLinkText = styled.span`
     visibility: hidden;
     transform: translate(5px,-50%);
     transition: opacity .4s cubic-bezier(.445,.05,.55,.95),
+                visibility .4s cubic-bezier(.445,.05,.55,.95),
                 transform .4s cubic-bezier(.445,.05,.55,.95);
     &:before {
         content: '';
@@ -71,20 +72,13 @@ export const SidebarLink = styled(NavLink)<LinkPropsType>`
     transition: color .4s cubic-bezier(.445,.05,.55,.95),
                 box-shadow .4s cubic-bezier(.445,.05,.55,.95);
     &.active {
-        box-shadow: 0 .3125rem .625rem 0 #05b8d1;
+        box-shadow: 0 0.3125rem 0.625rem 0 rgba(5, 184, 209, 65%);
         color: #05b8d1;
-    }
-    &:not(.active) ${SidebarLinkText} {
-        opacity: 0;
-        visibility: hidden;
-        transform: translate(5px,-50%);
     }
     &.active ${SidebarLinkText} {
         opacity: 1;
         visibility: visible;
         transform: translate(20px, -50%);
-        transition: color .4s cubic-bezier(.445,.05,.55,.95),
-        box-shadow .4s cubic-bezier(.445,.05,.55,.95);
     }
     &:hover ${SidebarLinkText} {
         opacity: 1;

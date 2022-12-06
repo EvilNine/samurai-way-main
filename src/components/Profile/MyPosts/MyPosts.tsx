@@ -2,20 +2,23 @@ import React from 'react';
 import Post from "./Post";
 import MyPostForm from "./MyPostForm";
 import {MyPostsElement} from "./MyPosts.styled";
+import {ProfilePropsType} from "../Profile";
 
-const MyPosts = () => {
-    const postData = [
-        {id: 1,message: 'Hi, how are you?', likesCount: 12},
-        {id: 2,message: 'yo', likesCount: 12},
-        {id: 3,message: 'It\'s my first post', likesCount: 12},
-        {id: 4,message: 'hi', likesCount: 12},
-        {id: 5,message: 'hi', likesCount: 12},
-    ]
+// type MyPostPropsType = ProfilePageType  & {
+//     addPostCallback?: (message: string) => void
+//     ChangePostText=
+// }
+
+const MyPosts: React.FC<ProfilePropsType> = (props) => {
+    
     return (
         <MyPostsElement>
             My posts
-            <MyPostForm />
-            { postData.map(item => <Post key={item.id} {...item}/>) }
+            <MyPostForm
+                addPostCallback={props.addPostCallback}
+                ChangePostText={props.ChangePostText}
+                postText={props.postText} />
+            { props.posts.map(item => <Post key={item.id} {...item}/>) }
         </MyPostsElement>
     )
 }

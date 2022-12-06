@@ -1,9 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
 import App from './App';
-import {GlobalStyle} from "./ui/global";
+import {RootStateType, state, subscribe} from "./redux/state";
 
-ReactDOM.render(<App />,
-  document.getElementById('root')
-);
+
+const rerenderEntireTree = (state: RootStateType) => {
+	ReactDOM.render(<App {...state} />,
+		document.getElementById('root')
+	);
+}
+
+rerenderEntireTree(state)
+
+subscribe(rerenderEntireTree)

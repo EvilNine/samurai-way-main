@@ -1,16 +1,30 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import {Textarea} from "../../../../ui/form/Textarea";
 import {Button} from "../../../../ui/form/Button";
 
 import {MyPostFormElement} from "./MyPostForm.styled";
 
-const MyPostForm = () => {
+
+type MyPostFormPropsType = {
+    addPostCallback: ( ) => void
+    ChangePostText: (postText: string) => void
+    postText: string
+}
+
+const MyPostForm: React.FC<MyPostFormPropsType> = (props) => {
+    
+    
     const addPostHandler = () => {
-        console.log('hi')
+        props.addPostCallback()
     }
+    
+    const onChangeText = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        props.ChangePostText(e.currentTarget.value)
+    }
+    
     return (
         <MyPostFormElement>
-            <Textarea />
+            <Textarea onChange={onChangeText} value={props.postText} />
             <Button onClick={addPostHandler}>Add post</Button>
         </MyPostFormElement>
     )
