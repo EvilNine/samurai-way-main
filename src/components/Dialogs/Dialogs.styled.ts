@@ -11,6 +11,7 @@ export const DialogColLeft = styled.div`
     padding: 30px 15px;
     display: flex;
     flex-wrap: wrap;
+  	flex-direction: column;
     gap: 15px;
 `
 

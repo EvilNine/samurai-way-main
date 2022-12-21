@@ -1,20 +1,13 @@
 import React from 'react';
-import MyPosts from "./MyPosts";
 import ProfileInfo from "./ProfileInfo";
-import { ProfilePageType} from "../../redux/state";
+import MyPostContainer from "./MyPosts/MyPostContainer";
 
-
-export type ProfilePropsType = ProfilePageType & {
-    addPostCallback: ()=>void
-    ChangePostText: (newText: string)=>void
-}
-
-const Profile: React.FC<ProfilePropsType> = (props) => {
+const Profile = () => {
     
     return (
         <>
             <ProfileInfo />
-            <MyPosts {...props}/>
+            <MyPostContainer />
         </>
     )
 }

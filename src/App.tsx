@@ -1,31 +1,56 @@
 import React from 'react';
-import {BrowserRouter, Route} from "react-router-dom";
+import { Redirect, Route} from "react-router-dom";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import Profile from "./components/Profile";
-import Dialogs from "./components/Dialogs";
 import {Wrapper, Main} from "./ui/layout";
 import {GlobalStyle} from "./ui/global";
-import {addPost, ChangePostText, RootStateType} from "./redux/state";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
+
+export type MessageType = {
+	id: number
+	message: string
+}
+export type DialogType = {
+	id: number
+	name: string
+}
+export type PostType = {
+	id: number
+	message: string
+	likesCount: number
+}
+export type ProfilePageType = {
+	posts: Array<PostType>
+	postText: string
+}
+export type DialogPageType = {
+	dialogUser: Array<DialogType>
+	messages: Array<MessageType>
+	newMessageBody: string
+}
+export type SidebarType = {}
+export type RootStateType = {
+	profilePage: ProfilePageType
+	dialogsPage: DialogPageType
+	sidebar: SidebarType
+}
 
 
-const App: React.FC<RootStateType> = (props) => {
-    
+const App = () => {
     return (
-        <BrowserRouter>
+        <>
             <GlobalStyle />
             <Header />
             <Sidebar />
             <Wrapper display={'flex'}>
                 <Main>
-                    <Route path={"/profile"} render={()=> <Profile posts={props.profilePage.posts}
-                                                                   postText={props.profilePage.postText}
-                                                                   addPostCallback={addPost}
-                                                                   ChangePostText={ChangePostText} /> } />
-                    <Route exact path={"/messages"} render={()=> <Dialogs dialogUser={props.dialogsPage.dialogUser} messages={props.dialogsPage.messages} /> }/>
+                    <Route path={'/'} render={()=><Redirect to="/profile" />} />
+                    <Route path={"/profile"} render={()=> <Profile  /> } />
+                    <Route exact path={"/messages"} render={()=> <DialogsContainer  /> }/>
                 </Main>
             </Wrapper>
-        </BrowserRouter>
+		</>
     )
 }
 

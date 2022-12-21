@@ -3,23 +3,27 @@ import {Textarea} from "../../../../ui/form/Textarea";
 import {Button} from "../../../../ui/form/Button";
 
 import {MyPostFormElement} from "./MyPostForm.styled";
+import {addPostAC, AddPostACType, changeNewTextAC, ChangeNewTextACType} from "../../../../redux/profileReducer";
 
 
 type MyPostFormPropsType = {
-    addPostCallback: ( ) => void
-    ChangePostText: (postText: string) => void
+    addPost: () => void
+    updateNewPostText: (newText: string) => void
     postText: string
 }
+
 
 const MyPostForm: React.FC<MyPostFormPropsType> = (props) => {
     
     
     const addPostHandler = () => {
-        props.addPostCallback()
+        props.addPost()
     }
     
     const onChangeText = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.ChangePostText(e.currentTarget.value)
+        const newText = e.currentTarget.value
+        props.updateNewPostText(newText)
+        
     }
     
     return (
