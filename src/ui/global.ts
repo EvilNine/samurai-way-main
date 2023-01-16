@@ -1,6 +1,12 @@
 import {createGlobalStyle} from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
+   :root {
+	 primary: #05b8d1;
+	 dark: #292E38;
+	 
+	 
+   }
     *,
     *::before,
     *::after {
@@ -18,5 +24,9 @@ export const GlobalStyle = createGlobalStyle`
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
     }
+	#root {
+	  	min-height: 100vh;
+	  	display: flex;
+	}
 
 `

@@ -1,6 +1,7 @@
 import React from 'react';
 import Avatar from "../../../../ui/modules/Avatar";
-import {PostElement, PostText} from "./Post.styled";
+import { ProfileAvatar } from '../../ProfileInfo/ProfileInfo.styled';
+import {PostAvatar, PostElement, PostText} from "./Post.styled";
 
 type PropPostType = {
     id: number
@@ -18,7 +19,9 @@ const Post: React.FC<PropPostType> = (
     ) => {
     return (
         <PostElement>
-            <Avatar src={'https://img.freepik.com/premium-photo/hipster-head-with-empty-space-3d-render-illustration_1172-983.jpg?size=338&ext=jpg&uid=R433202&ga=GA1.2.1420375084.1669209175'} />
+            <PostAvatar>
+                <Avatar src={'https://img.freepik.com/premium-photo/hipster-head-with-empty-space-3d-render-illustration_1172-983.jpg?size=338&ext=jpg&uid=R433202&ga=GA1.2.1420375084.1669209175'} />
+            </PostAvatar>
             <PostText>
                 {message && message}
                 <div>

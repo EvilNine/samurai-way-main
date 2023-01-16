@@ -2,25 +2,44 @@ import React from 'react';
 import {
     ProfileInfoImage,
     ProfileInfoElement,
-    AvatarDescription,
-    ProfileDescription} from "./ProfileInfo.styled";
+    ProfileAvatarStatus,
+    ProfileAvatar,
+    ProfileStatus, ProfileDetails, ProfileName
+} from "./ProfileInfo.styled";
 import imgSrc from "../../../img/banner.png";
 import Avatar from "../../../ui/modules/Avatar";
+import { ProfileType} from "../../../types";
+import SocialLinks from "../../../ui/modules/SocialLinks";
+import Loader from "../../../ui/modules/Loader";
 
-const ProfileInfo = (props: any) => {
+type PropsType = {
+    profile: ProfileType | null
+}
+const ProfileInfo: React.FC<PropsType> = ({profile}) => {
+    if (!profile) {
+        return <Loader/>
+    }
+    // TODO add lookingForAJob icon
     return (
-        <ProfileInfoElement>
+        <>
             <ProfileInfoImage>
                 <img src={imgSrc} alt=""/>
+                {/*<img src={profile.photos.large ? profile.photos.large! : imgSrc } />*/}
             </ProfileInfoImage>
 
-            <AvatarDescription>
-                <Avatar src={'https://img.freepik.com/premium-photo/hipster-head-with-empty-space-3d-render-illustration_1172-983.jpg?size=338&ext=jpg&uid=R433202&ga=GA1.2.1420375084.1669209175'} />
-                <ProfileDescription>
-                    description
-                </ProfileDescription>
-            </AvatarDescription>
-        </ProfileInfoElement>
+            <ProfileDetails>
+                <ProfileAvatar>
+                    <Avatar src={profile ? profile.photos.small : null} />
+                </ProfileAvatar>
+                <ProfileName>
+                    {profile ? profile.fullName : null }
+                </ProfileName>
+                {profile && <SocialLinks {...profile.contacts} />}
+                <ProfileStatus>
+                    {profile ? profile.aboutMe : null}
+                </ProfileStatus>
+            </ProfileDetails>
+        </>
     )
 };
 

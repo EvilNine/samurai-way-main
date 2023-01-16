@@ -9,6 +9,7 @@ import {
     MessageType
 } from "../../redux/dialogsReducer";
 import { PropsType} from "./DialogsContainer";
+import { Main } from '../../ui/layout';
 
 
 type DialogsPropsType = PropsType
@@ -26,16 +27,18 @@ const Dialogs: React.FC<DialogsPropsType> = (props) => {
         props.updateNewMessageBody(e.currentTarget.value)
     }
     return (
-        <DialogsElement>
-            <DialogColLeft>
-                {dialogsUserData}
-            </DialogColLeft>
-            <DialogColRight>
-                {messagesData}
-                <Textarea value={message} onChange={onChangeMessageHandler}></Textarea>
-                <Button onClick={onSendMessageHandler}>Send</Button>
-            </DialogColRight>
-        </DialogsElement>
+        <Main>
+            <DialogsElement>
+                <DialogColLeft>
+                    {dialogsUserData}
+                </DialogColLeft>
+                <DialogColRight>
+                    {messagesData}
+                    <Textarea value={message} onChange={onChangeMessageHandler}></Textarea>
+                    <Button onClick={onSendMessageHandler}>Send</Button>
+                </DialogColRight>
+            </DialogsElement>
+        </Main>
     )
 };
 

@@ -9,3 +9,11 @@ export const PostElement = styled.div`
 export const PostText = styled.div`
     margin-left: 1rem;
 `
+
+export const PostAvatar = styled.div`
+	width: 40px;
+  	height: 40px;
+  	border-radius: 50%;
+  	position: relative;
+  	overflow: hidden;
+`

@@ -2,7 +2,6 @@ import styled from "styled-components";
 import {NavLink} from "react-router-dom";
 
 type LinkPropsType = {
-    
     activeClassName?: string
 }
 export const SidebarElement = styled.aside`
@@ -17,10 +16,6 @@ export const SidebarElement = styled.aside`
     border-radius: 0;
     padding: 10px;
     box-shadow: 2px 0 4px #212931;
-    //background-color: #343b49;
-    //border-radius: 5px;
-    //flex: 0 0 25%;
-    //max-width: 25%;
     nav {
         width: 100%;
     }
@@ -75,11 +70,11 @@ export const SidebarLink = styled(NavLink)<LinkPropsType>`
         box-shadow: 0 0.3125rem 0.625rem 0 rgba(5, 184, 209, 65%);
         color: #05b8d1;
     }
-    &.active ${SidebarLinkText} {
-        opacity: 1;
-        visibility: visible;
-        transform: translate(20px, -50%);
-    }
+    // &.active ${SidebarLinkText} {
+    //     opacity: 1;
+    //     visibility: visible;
+    //     transform: translate(20px, -50%);
+    // }
     &:hover ${SidebarLinkText} {
         opacity: 1;
         visibility: visible;
@@ -95,5 +90,14 @@ export const LogoElement = styled.div`
     margin: 0 auto;
     img {
         width: 2rem;
+    }
+`
+
+export const SidebarAuth = styled.div`
+    margin-top: auto;
+    
+    a {
+        color: #fff;
+        text-decoration: none;
     }
 `

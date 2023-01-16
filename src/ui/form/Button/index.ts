@@ -1,7 +1,12 @@
 import styled from "styled-components";
 
-export const Button = styled.button`
+type ButtonType = {
+	fullWidth?: boolean
+}
+
+export const Button = styled.button<ButtonType>`
     background-color: #05b8d1;
+  
     border: 1px solid transparent;
     color: #292e38;
     border-radius: 5px;
@@ -16,6 +21,7 @@ export const Button = styled.button`
     user-select: none;
     vertical-align: middle;
     white-space: nowrap;
+  	width: ${(props)=> props.fullWidth ? '100%' : 'auto' };
     cursor: pointer;
   	&:hover {
     	background-color: #1fdffa;

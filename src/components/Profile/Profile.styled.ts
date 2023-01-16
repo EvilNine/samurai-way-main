@@ -1,5 +1,14 @@
 import styled from "styled-components";
 
+export const ProfileLayout = styled.div`
+	display: grid;
+	grid-template-columns: 25% 1fr 1fr;
+	grid-template-rows: 300px auto;
+	gap: 0;
+	grid-template-areas:
+		"imgArea imgArea imgArea"
+		"detailsArea postArea postArea";
+`
 
 export const ProfileElementImage = styled.div`
     display: flex;

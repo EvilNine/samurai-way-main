@@ -1,9 +1,7 @@
 import React, {ChangeEvent} from 'react';
 import {Textarea} from "../../../../ui/form/Textarea";
 import {Button} from "../../../../ui/form/Button";
-
 import {MyPostFormElement} from "./MyPostForm.styled";
-import {addPostAC, AddPostACType, changeNewTextAC, ChangeNewTextACType} from "../../../../redux/profileReducer";
 
 
 type MyPostFormPropsType = {
@@ -11,7 +9,6 @@ type MyPostFormPropsType = {
     updateNewPostText: (newText: string) => void
     postText: string
 }
-
 
 const MyPostForm: React.FC<MyPostFormPropsType> = (props) => {
     
