@@ -1,3 +1,5 @@
+import {authApi} from "../api/authApi";
+
 const SET_USER_DATA = 'SET-USER-DATA'
 const SET_FETCHING = 'SET-FETCHING'
 
@@ -5,7 +7,7 @@ let initialState = {
 	id: null as number | null,
 	email: null as string | null,
 	login: null as string | null,
-	isAuth: false,
+	isAuth: false as boolean,
 	captchaUrl: null as string | null// if null, then captcha is not required
 };
 
@@ -33,6 +35,16 @@ export const setAuthUserData = (payload: {id: number | null, login: string | nul
 		type:SET_USER_DATA,
 		payload
 	}) as const
+
 export const setFetching = (fetching: boolean) => ({type:SET_FETCHING,fetching}) as const
+
+export const getAuthUserData = ():any => (dispatch: any) => {
+	authApi.me().then(res => {
+		if( res.data.resultCode === 0 ) {
+			dispatch(setAuthUserData(res.data.data))
+		}
+	})
+}
+
 
 export default authReducer;

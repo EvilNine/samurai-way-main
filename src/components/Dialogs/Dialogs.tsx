@@ -24,8 +24,10 @@ const Dialogs: React.FC<DialogsPropsType> = (props) => {
         props.sendMessage()
     }
     const onChangeMessageHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.updateNewMessageBody(e.currentTarget.value)
+        props.updateNewMessage(e.currentTarget.value)
     }
+    
+    
     return (
         <Main>
             <DialogsElement>

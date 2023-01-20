@@ -1,9 +1,9 @@
 import React, {useEffect} from 'react';
 import Sidebar from "./Sidebar";
-import axios from "axios";
 import {AppStateType} from "../../redux/store";
 import {connect} from "react-redux";
-import {setAuthUserData} from "../../redux/authReducer";
+import {getAuthUserData} from "../../redux/authReducer";
+import {authApi} from "../../api/authApi";
 
 type mapStateType = {
 	// id: number | null,
@@ -12,22 +12,14 @@ type mapStateType = {
 	login: string | null
 }
 type mapDispatchType = {
-	setAuthUserData: (payload: {id: number | null, login: string | null, email: string | null }) => void
+	getAuthUserData: () => void
+	//setAuthUserData: (payload: {id: number | null, login: string | null, email: string | null }) => void
 }
 export type SidebarPropsType = mapStateType & mapDispatchType
 
 const SidebarContainer = (props: SidebarPropsType) => {
 	useEffect(()=>{
-		axios.get('https://social-network.samuraijs.com/api/1.0/auth/me', {
-				withCredentials: true
-			})
-			.then(res => {
-				//const {id,login,email} = {...res.data.data}
-				if( res.data.resultCode === 0 ) {
-					props.setAuthUserData(res.data.data)
-				}
-				
-			})
+		props.getAuthUserData()
 	})
 	
 	return (
@@ -42,4 +34,4 @@ const mapState = (state: AppStateType) => ({
 
 
 
-export default connect(mapState, {setAuthUserData})(SidebarContainer);
+export default connect(mapState, {getAuthUserData})(SidebarContainer);

@@ -1,3 +1,5 @@
+import {InferActionsTypes} from "./store";
+
 const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY';
 const SEND_MESSAGE = 'SEND-MESSAGE';
 
@@ -28,11 +30,13 @@ export type MessageType = {
 	message: string
 }
 export type InitialStateType = typeof initialState
-export type UpdateNewMessageACType = ReturnType<typeof updateNewMessageAC>
-export type SendMessageACType = ReturnType<typeof sendMessageAC>
-export type DialogsReducerACType = UpdateNewMessageACType | SendMessageACType
+// export type UpdateNewMessageACType = ReturnType<typeof updateNewMessageAC>
+// export type SendMessageACType = ReturnType<typeof sendMessageAC>
+// export type DialogsReducerACType = UpdateNewMessageACType | SendMessageACType
 
-const dialogsReducer = (state = initialState, action: DialogsReducerACType): InitialStateType => {
+
+
+const dialogsReducer = (state = initialState, action: ActionsType): InitialStateType => {
 	switch (action.type) {
 		case UPDATE_NEW_MESSAGE_BODY:
 			return {
@@ -40,8 +44,6 @@ const dialogsReducer = (state = initialState, action: DialogsReducerACType): Ini
 				newMessageBody: action.message
 			}
 		case SEND_MESSAGE:
-			const body = state.newMessageBody;
-			const newId = state.messages.length + 1
 			return {
 				...state,
 				messages: [...state.messages, {id: state.messages.length + 1, message: state.newMessageBody}],
@@ -52,7 +54,14 @@ const dialogsReducer = (state = initialState, action: DialogsReducerACType): Ini
 	}
 }
 
-export const updateNewMessageAC = (message: string) => ({type: UPDATE_NEW_MESSAGE_BODY, message}) as const
-export const sendMessageAC = () => ({type: SEND_MESSAGE}) as const
+export const actions = {
+	sendMessage: () => ({type: SEND_MESSAGE} as const),
+	updateNewMessage: (message: string) => ({type: UPDATE_NEW_MESSAGE_BODY, message} as const)
+}
+type ActionsType = InferActionsTypes<typeof actions>
+
+
+// export const updateNewMessageAC = (message: string) => ({type: UPDATE_NEW_MESSAGE_BODY, message}) as const
+// export const sendMessageAC = () => ({type: SEND_MESSAGE}) as const
 
 export default dialogsReducer

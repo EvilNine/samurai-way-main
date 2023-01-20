@@ -15,6 +15,7 @@ export const SidebarElement = styled.aside`
     align-items: flex-start;
     border-radius: 0;
     padding: 10px;
+    width: 96px;
     box-shadow: 2px 0 4px #212931;
     nav {
         width: 100%;

@@ -1,21 +1,24 @@
 import React from 'react';
 import {
     ProfileInfoImage,
-    ProfileInfoElement,
-    ProfileAvatarStatus,
     ProfileAvatar,
-    ProfileStatus, ProfileDetails, ProfileName
+    ProfileDetails,
+    ProfileName,
+    ProfileAbout
 } from "./ProfileInfo.styled";
 import imgSrc from "../../../img/banner.png";
 import Avatar from "../../../ui/modules/Avatar";
 import { ProfileType} from "../../../types";
 import SocialLinks from "../../../ui/modules/SocialLinks";
 import Loader from "../../../ui/modules/Loader";
+import ProfileStatus from "./ProfileStatus";
 
 type PropsType = {
     profile: ProfileType | null
+    status: string
+    updateStatus: (status: string) => void
 }
-const ProfileInfo: React.FC<PropsType> = ({profile}) => {
+const ProfileInfo: React.FC<PropsType> = ({profile, status, updateStatus}) => {
     if (!profile) {
         return <Loader/>
     }
@@ -35,9 +38,12 @@ const ProfileInfo: React.FC<PropsType> = ({profile}) => {
                     {profile ? profile.fullName : null }
                 </ProfileName>
                 {profile && <SocialLinks {...profile.contacts} />}
-                <ProfileStatus>
+                
+                <ProfileAbout>
                     {profile ? profile.aboutMe : null}
-                </ProfileStatus>
+                </ProfileAbout>
+    
+                <ProfileStatus status={status} updateStatus={updateStatus} />
             </ProfileDetails>
         </>
     )

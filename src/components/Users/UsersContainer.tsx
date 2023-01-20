@@ -10,9 +10,11 @@ import {
 	follow,
 	unfollow,
 	UsersInitianalStateType,
-	toggleFollowingProgress,
+	toggleFollowingProgress, getUsers,
 } from "../../redux/usersReducer";
 import { UserType } from '../../types';
+import {compose} from "redux";
+import withAuthRedirect from "../../hoc/withAuthRedirect";
 
 type mapStateType  = {
 	usersPage: UsersInitianalStateType
@@ -26,6 +28,7 @@ type mapDispatchType = {
 	setTotalUsersCount: (count: number) => void
 	setFetching: (fetching: boolean) => void
 	toggleFollowingProgress: (fetching: boolean, userId: number) => void
+	getUsers: (currentPage: number, pageSize: number) => void
 }
 
 export type PropsType = mapStateType & mapDispatchType
@@ -41,8 +44,10 @@ const UsersContainer = connect(mapState, {
 	setCurrentPage,
 	setTotalUsersCount,
 	setFetching,
-	toggleFollowingProgress
-	
+	toggleFollowingProgress,
+	getUsers
 })(Users)
 
-export default UsersContainer;
+export default compose(
+	withAuthRedirect
+)(UsersContainer)

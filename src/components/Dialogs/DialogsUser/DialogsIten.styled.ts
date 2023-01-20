@@ -14,3 +14,11 @@ export const DialogsUserName = styled.div`
     margin-left: 15px;
     text-decoration: none;
 `
+
+export const DialogUserImg = styled.div`
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	position: relative;
+	overflow: hidden;
+`

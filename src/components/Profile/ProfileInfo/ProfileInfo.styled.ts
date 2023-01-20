@@ -40,15 +40,17 @@ export const ProfileAvatar = styled.div`
 	align-items: center;
 	justify-content: center;
 	margin: -70px auto 0;
-  	div {
-		width: 100%;
-		height: 100%;
-	}
+  	color: #292e38;
 `
-
-export const ProfileStatus = styled.div`
+export const ProfileAbout = styled.div`
     margin-top: 15px;
   	text-align: center;
+`
+
+export const Status = styled.div`
+    margin: 15px;
+  	text-align: center;
+  	
 `
 export const ProfileName = styled.div`
 	text-align: center;

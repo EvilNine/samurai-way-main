@@ -8,15 +8,15 @@ import Loader from "../../ui/modules/Loader";
 
 type PropsType = ProfilePropsType
 
-const Profile: React.FC<PropsType> = ({profile,posts,postText,setUserProfile}) => {
-    // console.log(props)
-    if (!profile) {
+const Profile: React.FC<PropsType> = (props) => {
+    
+    if (!props.profile) {
         return <Loader/>
     }
     return (
         <Main blank>
             <ProfileLayout>
-                <ProfileInfo profile={profile} />
+                <ProfileInfo profile={props.profile} status={props.status} updateStatus={props.updateStatus}/>
                 <MyPostContainer  />
             </ProfileLayout>
         </Main>

@@ -3,7 +3,6 @@ import {Dispatch} from "redux";
 import MyPosts from "./MyPosts";
 import {
 	addPost,
-	ProfileInitianalStateType,
 	updateNewPostText
 } from "../../../redux/profileReducer";
 import {PostType} from "../../../types";

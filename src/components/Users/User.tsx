@@ -3,10 +3,7 @@ import {UserBody, UserFooter, UserImg, UserItem, UserItemContainer, UserName} fr
 import {Button} from "../../ui/form/Button";
 import {Col} from "../../ui/layout";
 import {UserType} from "../../types";
-import blankImg  from '../../img/avatarMan.png'
 import Avatar from '../../ui/modules/Avatar';
-import {usersAPI} from "../../api/usersApi";
-import {instance} from "../../api/api";
 
 type PropsType = {
 	user: UserType
@@ -19,18 +16,10 @@ type PropsType = {
 const User: React.FC<PropsType> = ({user, follow,unfollow, followingInProgress, toggleFollowingProgress}) => {
 	
 	const followHandler = ()=> {
-		toggleFollowingProgress(true, user.id)
-		usersAPI.unfollow(user.id).then(res => {
-			unfollow(user.id)
-			toggleFollowingProgress(false, user.id)
-		})
+		follow(user.id)
 	}
 	const unfollowHandler = ()=> {
-		toggleFollowingProgress(true, user.id)
-		usersAPI.follow(user.id).then(res => {
-			follow(user.id)
-			toggleFollowingProgress(false, user.id)
-		})
+		unfollow(user.id)
 	}
 	
 	return (
@@ -51,8 +40,12 @@ const User: React.FC<PropsType> = ({user, follow,unfollow, followingInProgress, 
 					<UserFooter>
 						{
 							user.followed
-								? <Button disabled={followingInProgress.some(id=>id===user.id)} onClick={followHandler} fullWidth={true}>Unfollow</Button>
-								: <Button disabled={followingInProgress.some(id=>id===user.id)} onClick={unfollowHandler} fullWidth={true}>Follow</Button>
+								? <Button disabled={followingInProgress.some(id=>id===user.id)}
+										  onClick={unfollowHandler}
+										  fullWidth={true}>Unfollow</Button>
+								: <Button disabled={followingInProgress.some(id=>id===user.id)}
+										  onClick={followHandler}
+										  fullWidth={true}>Follow</Button>
 						}
 					</UserFooter>
 				</UserItem>

@@ -1,50 +1,40 @@
 import React, {useEffect} from 'react';
 import {Row, Main } from '../../ui/layout';
 import  {PropsType} from "./UsersContainer";
-
 import User from './User';
 import Loader from '../../ui/modules/Loader';
-import {usersAPI} from "../../api/usersApi";
+
 
 //import Pagination from "../../ui/modules/Pagination";
 
 type UsersPropsType = PropsType
 
 const Users: React.FC<UsersPropsType> = (
-	{
-		setUsers,
+	props) => {
+	//console.log(props)
+	const {
+		usersPage,
 		follow,
 		unfollow,
-		usersPage,
-		setCurrentPage,
-		setTotalUsersCount,
-		setFetching,
-		toggleFollowingProgress
-	}) => {
-	
+		toggleFollowingProgress,
+		getUsers,
+		// setUsers,
+		// setCurrentPage,
+		// setTotalUsersCount,
+		// setFetching,
+		
+	} = {...props}
 	useEffect(()=> {
-		setFetching(true)
-		if(usersPage.users.length === 0){
-			usersAPI.getUsers(usersPage.currentPage, usersPage.pageSize).then(data => {
-				setUsers(data.items)
-				setTotalUsersCount(data.totalCount)
-				setFetching(false)
-			})
-			return () => {
-				setUsers([])
-			};
-		}
+		getUsers(usersPage.currentPage, usersPage.pageSize)
+		// return () => {
+		// 	setUsers([])
+		// }
 		
 	}, [])
 	
 	
 	const onPageChanged = (currentPage: number) => {
-		setFetching(true)
-		usersAPI.getUsers(usersPage.currentPage, usersPage.pageSize).then(data => {
-			setUsers(data.items)
-			setFetching(false)
-		})
-		
+		getUsers(currentPage, usersPage.pageSize)
 	}
 	
 	
