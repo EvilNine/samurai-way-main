@@ -1,4 +1,5 @@
 import {authApi} from "../api/authApi";
+import {Dispatch} from "redux";
 
 const SET_USER_DATA = 'SET-USER-DATA'
 const SET_FETCHING = 'SET-FETCHING'
@@ -38,7 +39,7 @@ export const setAuthUserData = (payload: {id: number | null, login: string | nul
 
 export const setFetching = (fetching: boolean) => ({type:SET_FETCHING,fetching}) as const
 
-export const getAuthUserData = ():any => (dispatch: any) => {
+export const getAuthUserData = ():any => (dispatch: Dispatch) => {
 	authApi.me().then(res => {
 		if( res.data.resultCode === 0 ) {
 			dispatch(setAuthUserData(res.data.data))

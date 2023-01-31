@@ -1,5 +1,6 @@
 import {PostType, ProfileType} from "../types";
 import {profileApi} from "../api/profileApi";
+import {Dispatch} from "redux";
 
 const ADD_POST = 'ADD-POST';
 const CHANGE_POST_TEXT = 'CHANGE-POST-TEXT'
@@ -67,18 +68,19 @@ export const setUserProfile = (profile: ProfileType) => ({type: SET_USER_PROFILE
 export const setStatus = (status: string) => ({type: SET_STATUS, status}) as const
 
 // TODO fix any
-export const getUserProfile = (userId: string): any => (dispatch: any) => {
+export const getUserProfile = (userId: string): any => (dispatch: Dispatch) => {
 	profileApi.getProfile(userId).then(res => {
+		console.log(res.data)
 		dispatch(setUserProfile(res.data))
 	})
 }
 
-export const getStatus = (userId: string): any => (dispatch: any) => {
+export const getStatus = (userId: string): any => (dispatch: Dispatch) => {
 	profileApi.getStatus(userId).then(res=>{
 		dispatch(setStatus(res.data))
 	})
 }
-export const updateStatus = (status: string): any => (dispatch: any) => {
+export const updateStatus = (status: string): any => (dispatch: Dispatch) => {
 	profileApi.updateStatus(status).then(res=>{
 		if (res.data.resultCode === 0) {
 			dispatch(setStatus(status))

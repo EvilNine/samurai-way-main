@@ -9,6 +9,10 @@ export const ProfileInfoElement = styled.div`
 export const ProfileInfoImage = styled.div`
   	grid-area: imgArea;
   	height: 300px;
+  	div {
+		width: 100%;
+		height: 100%;
+	}
     img {
 		box-shadow: 0 2px 4px #212931;
 		width: 100%;

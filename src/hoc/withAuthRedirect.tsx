@@ -9,7 +9,7 @@ type MapPropsType = {
 type DispatchPropsType = {
 }
 
-const mapStateRedirect = (state: AppStateType) => ({
+const mapStateRedirect = (state: AppStateType): MapPropsType => ({
 	isAuth: state.auth.isAuth
 })
 

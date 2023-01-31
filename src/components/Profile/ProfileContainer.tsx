@@ -37,8 +37,9 @@ const ProfileContainer = (props: ProfilePropsType) : React.ReactElement => {
 	
 	useEffect(()=> {
 		let userId = props.match.params.userId
+		console.log(props.profile)
 		if(!userId) {
-			userId = '2'
+			userId = '12174'
 		}
 		props.getUserProfile(userId)
 		props.getStatus(userId)

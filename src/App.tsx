@@ -12,22 +12,20 @@ import Login from './components/Login/Login';
 
 
 const App = () => {
-    return (
-        <>
-            <GlobalStyle />
-            <Header />
-            <SidebarContainer />
-            <Wrapper display={'flex'}>
-                
-                    <Route path={'/'} render={()=><Redirect to="/profile" />} />
-                    <Route path={'/profile/:userId?'} render={()=> <ProfileContainer  />  } />
-                    <Route path={'/messages'} render={()=> <DialogsContainer  /> }/>
-					<Route path={'/users'} render={()=> <UsersContainer />} />
-                    <Route path={'/login'} render={()=> <Login />}/>
-                    
-            </Wrapper>
+	return (
+		<>
+			<GlobalStyle />
+			<Header />
+			<SidebarContainer />
+			<Wrapper display={'flex'}>
+				<Route path={'/'} render={()=><Redirect to="/profile" />} />
+				<Route path={'/profile/:userId?'} render={()=> <ProfileContainer  />  } />
+				<Route path={'/messages'} render={()=> <DialogsContainer  /> }/>
+				<Route path={'/users'} render={()=> <UsersContainer />} />
+				<Route path={'/login'} render={()=> <Login />}/>
+			</Wrapper>
 		</>
-    )
+	)
 }
 
 
