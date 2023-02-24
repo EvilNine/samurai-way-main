@@ -43,7 +43,7 @@ const ProfileInfo: React.FC<PropsType> = ({profile, status, updateStatus}) => {
                     {profile ? profile.aboutMe : null}
                 </ProfileAbout>
     
-                <ProfileStatus status={status} updateStatus={updateStatus} />
+                <ProfileStatus />
             </ProfileDetails>
         </>
     )

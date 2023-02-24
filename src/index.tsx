@@ -9,6 +9,7 @@ import {Provider} from "react-redux";
 ReactDOM.render(
 	<Provider store={store}>
 		<BrowserRouter>
+			
 			<App  />
 		</BrowserRouter>
 	</Provider>,

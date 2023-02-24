@@ -1,31 +1,29 @@
-import React, {useEffect} from 'react';
+import React, {memo, useEffect} from 'react';
 import Sidebar from "./Sidebar";
 import {AppStateType} from "../../redux/store";
 import {connect} from "react-redux";
-import {getAuthUserData} from "../../redux/authReducer";
-import {authApi} from "../../api/authApi";
+import { logout} from "../../redux/authReducer";
+
 
 type mapStateType = {
 	// id: number | null,
 	// email: string | null,
 	isAuth: boolean
 	login: string | null
+	logout: () => void
 }
 type mapDispatchType = {
-	getAuthUserData: () => void
+	
 	//setAuthUserData: (payload: {id: number | null, login: string | null, email: string | null }) => void
 }
 export type SidebarPropsType = mapStateType & mapDispatchType
 
-const SidebarContainer = (props: SidebarPropsType) => {
-	useEffect(()=>{
-		props.getAuthUserData()
-	})
+const SidebarContainer = memo((props: SidebarPropsType) => {
 	
 	return (
 		<Sidebar {...props}/>
 	);
-};
+});
 
 const mapState = (state: AppStateType) => ({
 	isAuth: state.auth.isAuth,
@@ -34,4 +32,4 @@ const mapState = (state: AppStateType) => ({
 
 
 
-export default connect(mapState, {getAuthUserData})(SidebarContainer);
+export default connect(mapState, {logout})(SidebarContainer);

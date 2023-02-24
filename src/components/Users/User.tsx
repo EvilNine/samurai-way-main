@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {UserBody, UserFooter, UserImg, UserItem, UserItemContainer, UserName} from "./Users.styled";
 import {Button} from "../../ui/form/Button";
 import {Col} from "../../ui/layout";
@@ -10,10 +10,10 @@ type PropsType = {
 	follow: (userId: number) => void
 	unfollow: (userId: number) => void
 	followingInProgress: Array<number>
-	toggleFollowingProgress: (fetching: boolean, userId: number) => void
+	// toggleFollowingProgress: (fetching: boolean, userId: number) => void
 }
 
-const User: React.FC<PropsType> = ({user, follow,unfollow, followingInProgress, toggleFollowingProgress}) => {
+const User: React.FC<PropsType> = memo( ({user, follow,unfollow, followingInProgress}) => {
 	
 	const followHandler = ()=> {
 		follow(user.id)
@@ -52,6 +52,6 @@ const User: React.FC<PropsType> = ({user, follow,unfollow, followingInProgress, 
 			</UserItemContainer>
 		</Col>
 	);
-};
+});
 
 export default User;

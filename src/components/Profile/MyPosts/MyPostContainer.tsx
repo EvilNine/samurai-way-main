@@ -1,31 +1,22 @@
 import {connect} from "react-redux";
-import {Dispatch} from "redux";
 import MyPosts from "./MyPosts";
-import {
-	addPost,
-	updateNewPostText
-} from "../../../redux/profileReducer";
+import {addPost} from "../../../redux/profileReducer";
 import {PostType} from "../../../types";
 import {AppStateType} from "../../../redux/store";
 
 type MapStatePropsType = {
 	posts: Array<PostType>
-	postText: string
 }
 type mapDispatchToProps = {
-	updateNewPostText: (newText: string) => void
-	addPost: () => void
+	addPost: (postText: string) => void
 }
 export type PropsType = MapStatePropsType & mapDispatchToProps
 
 const mapState = (state: AppStateType) => {
 	return {
-		posts: state.profilePage.posts,
-		postText: state.profilePage.postText
+		posts: state.profilePage.posts
 	}
 }
-
-
-const MyPostContainer = connect(mapState, {updateNewPostText,addPost})(MyPosts)
+const MyPostContainer = connect(mapState, {addPost})(MyPosts)
 
 export default MyPostContainer;

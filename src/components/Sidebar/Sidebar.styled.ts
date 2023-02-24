@@ -96,9 +96,36 @@ export const LogoElement = styled.div`
 
 export const SidebarAuth = styled.div`
     margin-top: auto;
-    
+    width: 100%;
     a {
         color: #fff;
         text-decoration: none;
+    }
+`
+export const SidebarAuthTrue = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`
+
+export const Logout = styled.button`
+    //background: none;
+    background-color: #292e38;
+    border-radius: 5px;
+    
+    border: 0;
+    padding: 8px;
+    margin-top: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    color: #bfc9d9;
+    transition: color .4s cubic-bezier(.445,.05,.55,.95),
+                box-shadow .4s cubic-bezier(.445,.05,.55,.95);
+    &:active, &:focus {
+        outline: none
+    }
+    &:hover {
+        box-shadow: 0 0.3125rem 0.625rem 0 rgba(5, 184, 209, 65%);
     }
 `

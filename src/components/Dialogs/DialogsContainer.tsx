@@ -5,7 +5,7 @@ import {
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/store";
-import {compose, Dispatch} from "redux";
+import {compose} from "redux";
 import withAuthRedirect from "../../hoc/withAuthRedirect";
 import React from "react";
 
@@ -14,8 +14,7 @@ type MapStatePropsType = {
     
 }
 type MapDispatchPropsType = {
-    updateNewMessage: (newText: string) => void
-    sendMessage: () => void
+    sendMessage: (message: string) => void
 }
 export type PropsType = MapStatePropsType & MapDispatchPropsType
 

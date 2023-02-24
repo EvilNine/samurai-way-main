@@ -8,13 +8,14 @@ import {PostType, ProfileType} from "../../types";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import withAuthRedirect from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
+import {log} from "util";
 
 type mapStateType = {
 	profile: ProfileType | null
 	posts: Array<PostType>
-	postText: string
 	isAuth: boolean
 	status: string
+	authorizedUserId: string
 }
 type mapDispatchType = {
 	getUserProfile: (userId: string) => void
@@ -28,18 +29,10 @@ export type ProfilePropsType = mapStateType & mapDispatchType & RouteComponentPr
 
 const ProfileContainer = (props: ProfilePropsType) : React.ReactElement => {
 	
-	// const selectProfile = (state: AppStateType): ProfileInitianalStateType => state.profilePage
-	// const selector = useSelector(selectProfile)
-	// console.log(selector.profile)
-	//
-	// const dispatch = useDispatch()
-	// const dispatchUpdateStatus = dispatch(updateStatus)
-	
 	useEffect(()=> {
 		let userId = props.match.params.userId
-		console.log(props.profile)
 		if(!userId) {
-			userId = '12174'
+			userId = props.authorizedUserId
 		}
 		props.getUserProfile(userId)
 		props.getStatus(userId)
@@ -60,10 +53,9 @@ const ProfileContainer = (props: ProfilePropsType) : React.ReactElement => {
 const mapState = (state: AppStateType) => ({
 	profile: state.profilePage.profile,
 	posts: state.profilePage.posts,
-	postText: state.profilePage.postText,
 	status: state.profilePage.status,
-	// authorizedUserId: state.auth.userId,
-	// isAuth: state.auth.isAuth
+	authorizedUserId: state.auth.id,
+	isAuth: state.auth.isAuth
 })
 
 export default compose<React.FC>(

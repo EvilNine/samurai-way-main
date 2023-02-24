@@ -3,6 +3,7 @@ import styled from "styled-components";
 type EditableSpanType = {
 	justifyContent?: string
 	alignContent?: string
+	onEditHandler?: () => void
 }
 
 export const EditableSpanWrapper = styled.div<EditableSpanType>`

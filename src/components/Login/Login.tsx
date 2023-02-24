@@ -1,62 +1,95 @@
 import React from 'react';
-import {Textfield} from "../../ui/form/Textfield/Textfield";
 import {LoginInputWrapper, LoginTitle, LoginWrapper} from "./Login.styled";
 import {Button} from "../../ui/form/Button";
-import {Field, reduxForm} from "redux-form";
-import TextFieldCustom from "../../ui/form/Textfield/TextFieldCustom";
+import {Field, Form, Formik, FormikProps} from "formik";
+import {Textfield} from "../../ui/form/Textfield/Textfield";
+import {useDispatch, useSelector} from "react-redux";
+import {AppStateType} from "../../redux/store";
+import {login} from "../../redux/authReducer";
+import {Redirect} from "react-router-dom";
+import Checkbox from "../../ui/form/Checkbox";
+import * as Yup from 'yup';
 
-type FormPropsType = {
-	email?: string
-	password?: string
-	remember?: boolean
+
+type LoginFormType = {
+	onSubmit: (formData: LoginFormValuesType) => void
+}
+type LoginFormValuesType = {
+	// captcha: string
+	rememberMe: boolean
+	password: string
+	email: string
 }
 
-const LoginForm = (props:any) => {
-	const loginHandler = ()=> {
+const loginSchema = Yup.object().shape({
+	email: Yup.string().email('Invalid email').required('Required'),
 	
-	}
-	return <form onSubmit={props.handleSubmit}>
-		<LoginInputWrapper>
-			<Field placeholder={"email"}
-				   component={ (props:any) => {
-					   //console.log(props)
-					   return <><Textfield
-						   value={props.val}
-						   onChange={props.onChange}/>
-					   </>
-				   }}
-				   name={"email"}/>
-		</LoginInputWrapper>
-		<LoginInputWrapper>
-			<TextFieldCustom placeholder={"password"}
-							 type={'password'}
-							 component={'input'}
-							 name={"password"}/>
-		</LoginInputWrapper>
-		<LoginInputWrapper>
-			<label>
-				<Field type={"checkbox"}
-					   name={"remember"}
-					   component={'input'}/>
-				remember me
-			</label>
-		</LoginInputWrapper>
-		<Button onClick={ loginHandler }>Login</Button>
-	</form>
+})
+
+//TODO add field validation
+
+const LoginForm: React.FC<LoginFormType> = (props) => {
+	
+	const { onSubmit } = props
+	
+	return <Formik initialValues={{ email: '', password: '', rememberMe: false}}
+				   validationSchema={loginSchema}
+				   onSubmit={onSubmit}>
+		{(formik: FormikProps<LoginFormValuesType>) => {
+			
+			const { errors, touched, validateField, validateForm } = formik
+			
+			return (
+				<Form>
+					<LoginInputWrapper>
+						<Field name="email"
+							   placeholder="email"
+							   type={"text"}
+							   label={"email"}
+							   touched={touched}
+							   as={Textfield} />
+					</LoginInputWrapper>
+					<LoginInputWrapper>
+						<Field name="password"
+							   type={"password"}
+							   label={"password"}
+							   form={{touched, errors}}
+							   
+							   placeholder={"password"}
+							   as={Textfield} />
+					</LoginInputWrapper>
+					<LoginInputWrapper>
+						<Checkbox type={'checkbox'}
+								  label={'remember me'}
+								  name={'rememberMe'}/>
+					</LoginInputWrapper>
+					<Button type="submit">Login</Button>
+				</Form>
+			)
+			
+		}}
+	</Formik>
 }
 
-const LoginReduxForm = reduxForm({form: 'login'})(LoginForm)
-
-const Login = (props: any) => {
-	const onSubmit = (formData: FormPropsType) => {
-		console.log(formData)
+const LoginPage: React.FC = () => {
+	
+	const isAuth = useSelector( (state: AppStateType) => state.auth.isAuth )
+	const dispatch = useDispatch()
+	
+	const onSubmit = (formData: LoginFormValuesType) => {
+		dispatch(login(formData.email, formData.password, formData.rememberMe))
 	}
+	
+	if (isAuth) {
+		return <Redirect to={'/profile'}/>
+	}
+	
 	return (
 		<LoginWrapper>
 			<LoginTitle>Login</LoginTitle>
-			<LoginReduxForm onSubmit={onSubmit}/>
+			<LoginForm onSubmit={onSubmit}/>
 		</LoginWrapper>
 	);
 };
 
-export default Login;
+export default LoginPage;

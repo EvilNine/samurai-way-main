@@ -1,13 +1,24 @@
 import React from 'react';
-import {LogoElement, SidebarAuth, SidebarElement, SidebarLink, SidebarLinkText} from "./Sidebar.styled";
+import {
+    LogoElement,
+    Logout,
+    SidebarAuth,
+    SidebarAuthTrue,
+    SidebarElement,
+    SidebarLink,
+    SidebarLinkText
+} from "./Sidebar.styled";
 import logo from "../../img/logo__a.svg";
 import { ReactComponent as ProfileIcon} from "../../img/User.svg";
 import { ReactComponent as MessageIcon} from "../../img/Messages.svg";
 import { ReactComponent as NewsIcon} from "../../img/Layout5.svg";
 import { ReactComponent as SettingsIcon} from "../../img/Sliders.svg";
 import { ReactComponent as UsersIcon } from "../../img/Users.svg";
+import { ReactComponent as LogoutIcon } from "../../img/PowerButton.svg";
 import {NavLink} from "react-router-dom";
 import {SidebarPropsType} from "./SidebarContainer";
+import {Button} from "../../ui/form/Button";
+
 
 const Sidebar = (props: SidebarPropsType) => {
     return (
@@ -58,7 +69,9 @@ const Sidebar = (props: SidebarPropsType) => {
             
             <SidebarAuth>
                 {
-                    props.isAuth ? props.login : <NavLink to={'/login'}>login</NavLink>
+                    props.isAuth
+                        ? <SidebarAuthTrue>{props.login}  <Logout onClick={props.logout}><LogoutIcon /></Logout> </SidebarAuthTrue>
+                        : <NavLink to={'/login'}>login</NavLink>
                 }
             </SidebarAuth>
         </SidebarElement>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Redirect, Route} from "react-router-dom";
 import Header from "./components/Header";
 
@@ -9,9 +9,24 @@ import UsersContainer from "./components/Users";
 import ProfileContainer  from "./components/Profile/ProfileContainer";
 import SidebarContainer from "./components/Sidebar/SidebarContainer";
 import Login from './components/Login/Login';
+import {useDispatch, useSelector} from "react-redux";
+import {initThunk} from "./redux/appReducer";
+import {AppStateType} from "./redux/store";
+import Loader from "./ui/modules/Loader";
 
 
 const App = () => {
+	
+	const dispatch = useDispatch()
+	const initialized = useSelector( (state:AppStateType) => state.app.initialized )
+	
+	useEffect( ()=>{
+		dispatch(initThunk())
+		
+	},[])
+	
+	if(!initialized) return <Loader />
+	
 	return (
 		<>
 			<GlobalStyle />

@@ -10,9 +10,7 @@ const MyPosts: React.FC<MyPostType> = (props) => {
     return (
         <MyPostsElement>
             My posts
-            <MyPostForm addPost={props.addPost}
-                        updateNewPostText={props.updateNewPostText}
-                        postText={props.postText} />
+            <MyPostForm addPost={props.addPost} />
             { props.posts.map(item => <Post key={item.id} {...item}/>) }
         </MyPostsElement>
     )
